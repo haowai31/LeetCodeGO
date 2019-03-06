@@ -7,3 +7,9 @@ func min(m, n int) int {
 		return n
 	}
 }
+func abs(m int) int {
+	if m < 0 {
+		m = -m
+	}
+	return m
+}
