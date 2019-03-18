@@ -8,22 +8,17 @@ package main
  * }
  */
 
-type ListNode struct {
-	Val int
-	Next *ListNode
-}
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	l3 := l1
 	for {
-		if l1 == nil{
+		if l1 == nil {
 			return l3
 		}
 		if l2 != nil {
 			l1.Val += l2.Val
 			l2 = l2.Next
 		}
-		if l1.Val >= 10{
+		if l1.Val >= 10 {
 			l1.Val -= 10
 			if l1.Next == nil {
 				l1.Next = new(ListNode)

@@ -4,15 +4,14 @@ func findlettercombinations(dict map[string]string, digits string, result *[]str
 	if len(digits) == 0 {
 		return
 	}
-	for _, v := range digits {
-		for _, vj := range dict[string(v)] {
-			tmp := value + string(vj)
-			if len(digits) == 1 {
-				*result = append(*result, tmp)
-			}
-			findlettercombinations(dict, digits[1:], result, tmp)
+	for _, vj := range dict[string(digits[0])] {
+		tmp := value + string(vj)
+		if len(digits) == 1 {
+			*result = append(*result, tmp)
 		}
+		findlettercombinations(dict, digits[1:], result, tmp)
 	}
+	return
 }
 
 func letterCombinations(digits string) []string {
