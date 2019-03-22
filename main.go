@@ -7,9 +7,9 @@ func main() {
 		"leetcode12": leetcode12, "leetcode13": leetcode13, "leetcode14": leetcode14, "leetcode15": leetcode15,
 		"leetcode16": leetcode16, "leetcode17": leetcode17, "leetcode18": leetcode18, "leetcode19": leetcode19,
 		"leetcode22": leetcode22, "leetcode23": leetcode23, "leetcode24": leetcode24, "leetcode25": leetcode25,
-		"leetcode28": leetcode28,
+		"leetcode28": leetcode28, "leetcode29": leetcode29, "leetcode30": leetcode30,
 	}
 
-	now := "leetcode28"
+	now := "leetcode30"
 	funcs[now]()
 }
