@@ -19,7 +19,6 @@ func longestValidParentheses(s string) int {
 				result = dp[i]
 			}
 		}
-
 	}
 
 	return result
