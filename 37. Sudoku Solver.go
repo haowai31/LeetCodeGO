@@ -1,63 +1,68 @@
 package main
 
-func solveSudokuxx(board [][]byte) bool {
-	for i := range board {
-		for j, num := range board[i] {
-			if num == '.' {
-				for index := 1; index <= 9; index++ {
-					board[i][j] = byte(index) + '0'
-					if isValade_Sudoku(board, i, j) && solveSudokuxx(board) {
-						return true
-					}
-					board[i][j] = '.'
-				}
-				return false
-			}
-		}
+func next(i, j int) (ni, nj int) {
+	nj = j + 1
+	if nj == 9 {
+		nj = 0
+		ni = i + 1
+	} else {
+		ni = i
 	}
-	return true
+	return
 }
 
-func isValade_Sudoku(xx [][]byte, i int, j int) bool {
-	var tmp map[byte]bool = make(map[byte]bool)
-	for ix := range xx[i] {
-		if tmp[xx[ix][j]] && xx[ix][j] != '.' {
-			return false
-		}
-		if xx[ix][j] != '.' {
-			tmp[xx[ix][j]] = true
-		}
+var entrys = []byte{'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+
+func solveSudokuxx(board [][]byte, i, j int) bool {
+	if i == 9 {
+		return true
 	}
-	tmp = make(map[byte]bool)
-	for jx := 0; jx < 9; jx++ {
-		if tmp[xx[i][jx]] && xx[i][jx] != '.' {
-			return false
-		}
-		if xx[i][jx] != '.' {
-			tmp[xx[i][jx]] = true
-		}
+	ni, nj := next(i, j)
+	if board[i][j] != '.' {
+		return solveSudokuxx(board, ni, nj)
 	}
-	tmp = make(map[byte]bool)
-	for ix := i / 3; ix < i/3+3; ix++ {
-		for jx := j / 3 * 3; jx < j/3*3+3; jx++ {
-			if tmp[xx[ix][jx]] && xx[ix][jx] != '.' {
-				return false
-			}
-			if xx[ix][jx] != '.' {
-				tmp[xx[ix][jx]] = true
+	for _, e := range entrys {
+		if !inCel(board, i, j, e) && !inRow(board, i, e) && !inCol(board, j, e) {
+			board[i][j] = e
+			if solveSudokuxx(board, ni, nj) {
+				return true
 			}
 		}
 	}
-	return true
+	board[i][j] = '.'
+	return false
+}
+
+func inCel(board [][]byte, i, j int, e byte) bool {
+	ci, cj := i/3, j/3
+	for x := range entrys {
+		if board[3*ci+x/3][3*cj+x%3] == e {
+			return true
+		}
+	}
+	return false
+}
+
+func inCol(board [][]byte, j int, e byte) bool {
+	for x := range entrys {
+		if board[x][j] == e {
+			return true
+		}
+	}
+	return false
+}
+
+func inRow(board [][]byte, i int, e byte) bool {
+	for x := range entrys {
+		if board[i][x] == e {
+			return true
+		}
+	}
+	return false
 }
 
 func solveSudoku(board [][]byte) {
-	solveSudokuxx(board)
-	for i := 0; i < 9; i++ {
-		for j := 0; j < 9; j++ {
-
-		}
-	}
+	solveSudokuxx(board, 0, 0)
 }
 
 func leetcode37() {
