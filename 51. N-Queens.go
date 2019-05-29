@@ -57,8 +57,7 @@ func solveNQueensHelper(res *[]string, n int, now string) {
 }
 
 func judgequeenscex(lx, ly, rx, ry int) bool {
-	v := (ry - ly) / (rx - lx)
-	if abs(v) == 1 {
+	if abs(rx-lx) == abs(ry-ly) {
 		return true
 	} else {
 		return false
@@ -66,6 +65,6 @@ func judgequeenscex(lx, ly, rx, ry int) bool {
 }
 
 func leetcode51() {
-	var n = 4
+	var n = 5
 	print(solveNQueens(n))
 }
