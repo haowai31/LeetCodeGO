@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	leetcode67()
+	leetcode70()
 }
